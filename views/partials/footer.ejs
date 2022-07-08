@@ -1,0 +1,37 @@
+</body>
+<script>
+    const urlbox = document.getElementById("urlbox");
+    const shortUrl = document.getElementById("shortUrl")
+    urlbox.addEventListener("submit", function(e) {
+        e.preventDefault();
+    })
+
+    function showResult() {
+
+let url = document.getElementById("url").value;
+let postData = {url: url}
+$.ajax({
+type: "POST",
+dataType: 'text',
+url: "/",
+data: postData,
+contentType: 'application/x-www-form-urlencoded',
+cache: false,
+success : function (response) {
+            const message = document.createElement("p")
+            const shortLink = document.createElement("p")
+            message.textContent = JSON.parse(response).message
+            shortLink.textContent = JSON.parse(response).shortLink
+            shortUrl.textContent = "";
+            shortUrl.append(message)
+            shortUrl.append(shortLink)
+            //alert(JSON.parse(response).shortLink)
+        }
+});
+
+
+        const result = document.querySelector(".result");
+        result.style.display = "flex";
+    }
+</script>
+</html>
