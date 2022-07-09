@@ -1,0 +1,63 @@
+body {
+    background-color: #ba9e34;
+}
+
+#copylocation {
+    display: none;
+}
+
+#sharelocation {
+    display: none;
+}
+
+/* iPhone Portrait */
+@media screen and (min-width: 390px) {
+    html {
+      height: 500px;
+    }
+  
+    button {
+      background-color: #e0cc80;
+      color: black;
+      font-size: x-large;
+      border-radius: 15px;
+      text-decoration: none;
+    }
+
+    #map {
+        width: 375px;
+        grid-row: auto;
+    }
+  
+    .main {
+      display: grid;
+      width: 375px;
+      border: 1px solid black;
+      grid-template-rows: 60px 400px 200px;
+    }
+
+    .main > div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .main > div > .dog {
+        background-color: #e0cc80;
+        border-radius: 50%;
+        font-size: xx-large;
+    }
+
+    .main > button {
+        width: 70px;
+        bottom: 0;
+    }
+
+    #copylocation {
+        font-size: medium;
+    }
+    
+    #sharelocation {
+        font-size: medium;
+    }
+  }

@@ -1,5 +1,6 @@
 </body>
 <script>
+  //var map = L.map("map");
     /*
     const urlbox = document.getElementById("urlbox");
     const shortUrl = document.getElementById("shortUrl")
@@ -35,7 +36,23 @@ success : function (response) {
         result.style.display = "flex";
     }*/
     function geoFindMe() {
+      /*
+L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png").addTo(map);
 
+map.setView([48.85, 2.35], 12);
+
+
+  map.locate({
+      setView: true,
+      enableHighAccuracy: true
+    })
+    .on('locationfound', function(e) {
+      var marker = new L.marker(e.latlng);
+      marker.addTo(map);
+    });
+
+
+/*
 const status = document.querySelector('#status');
 const mapLink = document.querySelector('#map-link');
 const iframe = document.querySelector("#iframe")
@@ -65,10 +82,14 @@ if(!navigator.geolocation) {
   status.textContent = 'Locating…';
   navigator.geolocation.getCurrentPosition(success, error);
 }
-
+*/
 }
 
-document.querySelector('#find-me').addEventListener('click', geoFindMe);
+//document.querySelector('#find-me').addEventListener('click', geoFindMe);
+//document.querySelector('#find-me2').addEventListener('click', geoFindMe);
+document.querySelector('#find-me2').addEventListener('click', getLoc);
+document.querySelector("#sharelocation").addEventListener("click", shareLoc);
 
 </script>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 </html>

@@ -1,4 +1,4 @@
-<div>
+<!--<div>
   <button id="find-me">Show my location</button><br />
   <p id="status"></p>
   <a id="map-link" target="_blank"></a>
@@ -17,4 +17,87 @@
 </small>
 
 <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=18.50353002548218%2C59.52952795387858%2C18.507971763610843%2C59.531456566958596&amp;layer=mapnik&amp;marker=59.53049227421157%2C18.50575089454651" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/?mlat=59.53049&amp;mlon=18.50575#map=18/59.53049/18.50575">View Larger Map</a></small>
+</div>-->
+<div class="main">
+  <div>
+    <h2 class="dog">🐕 </h2>
+    <h2> Share Location</h2>
+  </div>
+  <div id="map"></div>
+  <div>
+    <button id="find-me2">Get Location</button>
+    <button id="sharelocation">Share Location</button>
+    <button id="copylocation">Copy Location to Clipboard</button>
+  </div>
 </div>
+
+<script>
+
+  let currLatitude
+  let currLongitude
+
+  function getLoc() {
+  if (navigator.geolocation) {
+    // timeout at 60000 milliseconds (60 seconds)
+    const options = {timeout:60000};
+    navigator.geolocation.getCurrentPosition(success, error, options);
+  } else {
+    alert("Geolocation is not supported by this browser");
+  }
+
+  function success(position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+    getMap(latitude, longitude);
+    document.querySelector('#find-me2').style.display = "none"
+    document.querySelector("#sharelocation").style.display = "flex"
+    document.querySelector("#copylocation").style.display = "flex"
+  }
+  function error() {
+    alert("Unable to retrieve location");
+  }
+
+  function getMap(latitude, longitude) {
+    let customIcon = {
+      iconUrl:"/dogface.png",
+      iconSize:[20,20]
+    }
+
+    let myIcon = L.icon(customIcon);
+
+    let iconOptions = {
+      title:"company name",
+      draggable:true,
+      icon:myIcon
+    }
+
+    const map = L.map("map").setView([latitude, longitude], 50);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(
+      map
+    );
+    L.marker([latitude, longitude], iconOptions).addTo(map);
+    currLatitude = latitude;
+    currLongitude = longitude;
+    console.log(map)
+  }
+}
+
+function shareLoc() {
+  let postData = {
+      latitude: currLatitude,
+      longitude: currLongitude,
+    }
+
+    $.ajax({
+      type: "POST",
+      dataType: 'text',
+      url: "/",
+      data: postData,
+      contentType: 'application/x-www-form-urlencoded',
+      cache: false,
+      success : function (response) {
+                  alert(response)
+              }
+    });
+}
+</script>
