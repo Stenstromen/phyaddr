@@ -10,7 +10,7 @@
     <button id="copylocation">Copy Location to Clipboard</button>
   </div>
   <div>
-    <p style="display: block;" id="shareurl"></p>
+    <p style="display: block; color: #ba9e34;" id="shareurl"></p>
   </div>
 </div>
 
@@ -110,5 +110,8 @@ function shareLoc() {
 
 function copyLoc() {
     CopyToClipboard("shareurl")
+    //const button = document.querySelector("#copylocation")
+    //button.disabled = true;
 }
+
 </script>
