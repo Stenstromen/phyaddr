@@ -1,0 +1,44 @@
+<div class="main">
+  <div>
+    <h2 class="dog">🐕 </h2>
+    <h2> My Location</h2>
+  </div>
+  <div id="map"></div>
+  <div style="display: block;">
+    <p style="margin-bottom: 0;">Latitude:  <%= latitude %></p>
+    <p style="margin-top: 0;">Longitude: <%= longitude %></p>
+    <div style="display:flex; justify-content: center; margin-top: 20px;"><button id="gohome">Go Home</button></div>
+  </div>
+</div>
+<script>
+  const latitude = "<%= latitude %>";
+  const longitude = "<%= longitude %>";
+  getMap(latitude, longitude);
+
+  function getMap(latitude, longitude) {
+    let customIcon = {
+      iconUrl: "/dogface.png",
+      iconSize: [20, 20],
+    };
+
+    let myIcon = L.icon(customIcon);
+
+    let iconOptions = {
+      title: "company name",
+      draggable: true,
+      icon: myIcon,
+    };
+
+    const map = L.map("map").setView([latitude, longitude], 50);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(
+      map
+    );
+    L.marker([latitude, longitude], iconOptions).addTo(map);
+  }
+
+  function gohome() {
+    location.href = "/"
+  }
+
+  document.querySelector('#gohome').addEventListener('click', gohome);
+</script>

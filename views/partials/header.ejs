@@ -8,6 +8,17 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <!--<script src="/script.js"></script>-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+      function CopyToClipboard(id) {
+  let r = document.createRange();
+  r.selectNode(document.getElementById(id));
+  window.getSelection().removeAllRanges();
+  window.getSelection().addRange(r);
+  document.execCommand('copy');
+  window.getSelection().removeAllRanges();
+}
+    </script>
     <link rel="stylesheet" type="text/css" href="/style.css" />
     <meta property="og:title" content="Link Shortener" />
     <meta property="og:image" content="https://chat.nyancat.se/nyanicon.png" />

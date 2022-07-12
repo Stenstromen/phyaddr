@@ -6,11 +6,17 @@ function sendIndex(req, res) {
 }
 
 function sendLocation(req, res) {
-  console.log(req.params.id);
   const foundLocation = model.addrDb.find(
     (msg) => msg.urlid === req.params.id
   );
-  res.send(foundLocation);
+  let result = {
+    latitude: JSON.parse(foundLocation.latitude),
+    longitude: JSON.parse(foundLocation.longitude)
+  }
+  res.render("share.ejs", {
+    latitude: result.latitude,
+    longitude: result.longitude
+  })
 }
 
 function saveLocation(req, res) {
@@ -20,8 +26,8 @@ function saveLocation(req, res) {
     longitude: req.body.longitude,
   };
   model.addrDb.push(response);
-  console.log(model.addrDb);
-  res.send(response);
+  //console.log(model.addrDb);
+  res.send(response.urlid);
 }
 
 module.exports = {
