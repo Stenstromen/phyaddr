@@ -34,6 +34,7 @@ function saveLocation(req, res) {
 function realTimeTx(req, res) {
     res.render("realtimetx.ejs", {
         urlid:urlId(),
+        room: req.params.id,
     })
 }
 

@@ -14,6 +14,7 @@
   socket.emit("join_room", packet.room)
 
   socket.on("location", (data) => {
+    console.log(data);
     getMap(data.latitude, data.longitude);
   })
 
