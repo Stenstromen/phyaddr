@@ -7,9 +7,14 @@
 <script>
     const socket = io();
 
+    let map;
+    let marker;
+
     let packet = {
         room: "<%= room %>"
     }
+
+    console.log(packet.room)
 
     socket.emit("join_room", packet.room)
 
@@ -17,7 +22,7 @@
     const options = {timeout:60000};
     setInterval(function() {
         navigator.geolocation.getCurrentPosition(success, error, options);
-    }, 2000)
+    }, 1000)
   } else {
     alert("Geolocation is not supported by this browser");
   }
@@ -39,7 +44,7 @@
 
   function getMap(latitude, longitude) {
 
-    clearMap();
+    //clearMap();
 
     let customIcon = {
       iconUrl:"/dogface.png",
@@ -54,18 +59,36 @@
       icon:myIcon
     }
 
-    const map = L.map("map").setView([latitude, longitude], 50);
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(
-      map
-    );
-    L.marker([latitude, longitude], iconOptions).addTo(map);
-  }
+    //const map = L.map("map").setView([latitude, longitude], 50);
+    if (!map) {
+        map = L.map("map").setView([latitude, longitude], 50);
+        console.log("here")
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
+        L.marker([latitude, longitude], iconOptions).addTo(map);
+    } else {
+        let walkingIcon = {
+            iconUrl:"/shiba.gif",
+            iconSize:[20,20]
+        }
 
-  function clearMap() {
-    console.log("Running clearmap")
-    const map = L.map("map")
-    map.off();
-    map.remove();
+        let walkIcon = L.icon(walkingIcon);
+
+        let walkOptions = {
+            title:"company name",
+            draggable:true,
+            icon:walkIcon
+        }
+        
+        if (marker) {
+            map.removeLayer(marker);
+            map.removeControl(marker);
+            marker = L.marker([latitude, longitude], walkOptions).addTo(map);
+            map.addLayer(marker)
+        } else {
+            marker = L.marker([latitude, longitude], walkOptions).addTo(map);
+            map.addLayer(marker)
+        }
+    }
   }
 
 </script>
