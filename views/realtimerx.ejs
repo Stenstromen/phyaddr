@@ -1,42 +1,65 @@
 <%- include("partials/header.ejs") %>
 <div class="main">
-    <h1>Hello world</h1>
-    <div id="map"></div>
+    <div>
+        <h1>Track Me 🦮</h1>
+        <img src="/shiba.gif" width="43.2px"/>
+    </div>    
+    <div id="map"></div>   
+    <div>
+        <p id="latitude" style="margin: 10px;"></p>
+        <p id="longitude"></p>
+    </div>
 </div>
 <script src="/socket.io.js"></script>
 <script>
     const socket = io();
 
+    let map;
+    let marker;
+
     let packet = {
         room: "<%= room %>"
     }
+    let platitude = document.getElementById("latitude");
+    let plongitude = document.getElementById("longitude");
 
   socket.emit("join_room", packet.room)
 
   socket.on("location", (data) => {
     console.log(data);
     getMap(data.latitude, data.longitude);
+    platitude.textContent = data.latitude;
+    plongitude.textContent = data.longitude;
   })
 
   function getMap(latitude, longitude) {
-    let customIcon = {
-      iconUrl: "/dogface.png",
-      iconSize: [20, 20],
-    };
+    if (!map) {
+        map = L.map("map").setView([latitude, longitude], 17);
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
+    } else {
+        let walkingIcon = {
+            iconUrl:"/shiba.gif",
+            iconSize:[20,20]
+        }
 
-    let myIcon = L.icon(customIcon);
+        let walkIcon = L.icon(walkingIcon);
 
-    let iconOptions = {
-      title: "company name",
-      draggable: true,
-      icon: myIcon,
-    };
+        let walkOptions = {
+            title:"company name",
+            draggable:true,
+            icon:walkIcon
+        }
 
-    const map = L.map("map").setView([latitude, longitude], 50);
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(
-      map
-    );
-    L.marker([latitude, longitude], iconOptions).addTo(map);
+        if (marker) {
+            map.removeLayer(marker);
+            map.removeControl(marker);
+            marker = L.marker([latitude, longitude], walkOptions).addTo(map);
+            map.addLayer(marker)
+        } else {
+            marker = L.marker([latitude, longitude], walkOptions).addTo(map);
+            map.addLayer(marker)
+        }
+    }
   }
 </script>
 <%- include("partials/footer.ejs") %>

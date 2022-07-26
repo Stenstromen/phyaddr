@@ -5,7 +5,8 @@
   </div>
   <div id="map"></div>
   <div>
-    <button id="find-me2">Get Location</button>
+      <button id="find-me2">Get Location 🗺</button>
+      <button id="find-me-live">Get Realtime Location 🛰</button>
     <button id="sharelocation">Share Location</button>
     <button id="copylocation">Copy Location to Clipboard</button>
   </div>
@@ -18,9 +19,13 @@
   let currLatitude
   let currLongitude
 
+  function getLiveLoc() {
+    console.log("poo")
+    location.href = "http://localhost:8080/realtime/tx"
+  }
+
   function getLoc() {
   if (navigator.geolocation) {
-    // timeout at 60000 milliseconds (60 seconds)
     const options = {timeout:60000};
     navigator.geolocation.getCurrentPosition(success, error, options);
   } else {
@@ -32,6 +37,7 @@
     const longitude = position.coords.longitude;
     getMap(latitude, longitude);
     document.querySelector('#find-me2').style.display = "none"
+    document.querySelector("#find-me-live").style.display = "none"
     document.querySelector("#sharelocation").style.display = "flex"
     document.querySelector("#copylocation").style.display = "flex"
   }
@@ -100,18 +106,24 @@ function shareLoc() {
       data: postData,
       contentType: 'application/x-www-form-urlencoded',
       cache: false,
-      success : function (response) {
+      success : async function (response) {
                   console.log(response)
-                  let shareurl = document.getElementById("shareurl");
-                  shareurl.textContent = "http://localhost:8080/" + response
+                  const shareData = {
+                    title: "My Location 🐶",
+                    text: "My Location 🐶",
+                    url: "https://noclip.se" + response
+                  }
+                  try {
+                    await navigator.share(shareData);
+                } catch (err) {
+                    console.log(err)
+                }
               }
     });
 }
 
 function copyLoc() {
     CopyToClipboard("shareurl")
-    //const button = document.querySelector("#copylocation")
-    //button.disabled = true;
 }
 
 </script>

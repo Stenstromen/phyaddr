@@ -1,24 +1,67 @@
 <%- include("partials/header.ejs") %>
 <div class="main">
-    <h1>Hello world</h1>
+    <div>
+    <h1>TX:ing Loc 📻</h1>
+    <img src="/shiba.gif" width="43.2px"/>
+    </div>
     <div id="map"></div>
+    <div>
+        <button id="sharelivelocation">Share Live Location</button>
+        <button id="copylivelocation">Copy Live Location to Clipboard</button>
+    </div>
+    <p style="color: #ba9e34" id="shareurl"></p>
 </div>
 <script src="/socket.io.js"></script>
 <script>
+document.querySelector("#copylivelocation").addEventListener("click", copyLoc);
+document.querySelector("#sharelivelocation").addEventListener("click", shareLoc);
+function copyLoc() {
+    CopyToClipboard("shareurl")
+    console.log("asd")
+}
+async function shareLoc() {
+    const shareData = {
+        title: "My Location 🐶",
+        text: "My Location 🐶",
+        url: "https://noclip.se/realtime/rx/" + room
+    }
+    try {
+        await navigator.share(shareData);
+    } catch (err) {
+        console.log(err)
+  }
+}
+
     const socket = io();
 
     let map;
     let marker;
-
-    let packet = {
-        room: "<%= room %>"
-    }
-
-    console.log(packet.room)
-
-    socket.emit("join_room", packet.room)
+    let room;
 
     if (navigator.geolocation) {
+        let postData = {
+        latitude: navigator.geolocation.getCurrentPosition.latitude,
+        longitude: navigator.geolocation.getCurrentPosition.longitude,
+        }
+
+        $.ajax({
+        type: "POST",
+        dataType: 'text',
+        url: "/",
+        data: postData,
+        contentType: 'application/x-www-form-urlencoded',
+        cache: false,
+        success : function (response) {
+                    console.log(response)
+                    socket.emit("join_room", response)
+                    room = response;
+                    let shareurl = document.getElementById("shareurl");
+                    shareurl.textContent = "https://noclip.se/realtime/rx/" + room
+                }
+        });
+
+        
+
     const options = {timeout:60000};
     setInterval(function() {
         navigator.geolocation.getCurrentPosition(success, error, options);
@@ -33,6 +76,7 @@
     let packet = {
         latitude: latitude,
         longitude: longitude,
+        room: room,
     }
     console.log("Sending " + latitude + longitude)
     socket.emit("location", packet)
@@ -43,8 +87,6 @@
   }
 
   function getMap(latitude, longitude) {
-
-    //clearMap();
 
     let customIcon = {
       iconUrl:"/dogface.png",
@@ -58,8 +100,6 @@
       draggable:true,
       icon:myIcon
     }
-
-    //const map = L.map("map").setView([latitude, longitude], 50);
     if (!map) {
         map = L.map("map").setView([latitude, longitude], 50);
         console.log("here")
@@ -78,7 +118,7 @@
             draggable:true,
             icon:walkIcon
         }
-        
+
         if (marker) {
             map.removeLayer(marker);
             map.removeControl(marker);
@@ -90,6 +130,5 @@
         }
     }
   }
-
 </script>
 <%- include("partials/footer.ejs") %>

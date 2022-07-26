@@ -41,10 +41,10 @@ function realTimeTx(req, res) {
 function realTimeRx(req, res) {
     const foundLocation = model.addrDb.find((msg) => msg.urlid === req.params.id);
     if (foundLocation) {
-      let result = {
+      /*let result = {
         latitude: JSON.parse(foundLocation.latitude),
         longitude: JSON.parse(foundLocation.longitude),
-      };
+      };*/
       res.render("realtimerx.ejs", {
         room: req.params.id,
       });

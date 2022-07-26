@@ -1,63 +1,281 @@
 body {
-    background-color: #ba9e34;
+  background-color: #ba9e34;
 }
 
 #copylocation {
-    display: none;
+  display: none;
 }
 
 #sharelocation {
-    display: none;
+  display: none;
 }
 
 /* iPhone Portrait */
 @media screen and (min-width: 390px) {
-    html {
-      height: 500px;
-    }
-  
-    button {
-      background-color: #e0cc80;
-      color: black;
-      font-size: x-large;
-      border-radius: 15px;
-      text-decoration: none;
-    }
-
-    #map {
-        width: 375px;
-        grid-row: auto;
-    }
-  
-    .main {
-      display: grid;
-      width: 375px;
-      border: 1px solid black;
-      grid-template-rows: 60px 400px 200px;
-    }
-
-    .main > div {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .main > div > .dog {
-        background-color: #e0cc80;
-        border-radius: 50%;
-        font-size: xx-large;
-    }
-
-    .main > button {
-        width: 70px;
-        bottom: 0;
-    }
-
-    #copylocation {
-        font-size: medium;
-    }
-    
-    #sharelocation {
-        font-size: medium;
-    }
+  html {
+    height: 500px;
   }
+
+  button {
+    background-color: #e0cc80;
+    color: black;
+    font-size: x-large;
+    border-radius: 15px;
+    text-decoration: none;
+  }
+
+  #map {
+    width: 375px;
+    grid-row: auto;
+  }
+
+  .main {
+    display: grid;
+    width: 375px;
+    grid-template-rows: 60px 400px 200px;
+  }
+
+  .main > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .main > div > .dog {
+    background-color: #e0cc80;
+    border-radius: 50%;
+    font-size: xx-large;
+  }
+
+  .main > button {
+    width: 70px;
+    bottom: 0;
+  }
+
+  #copylocation {
+    font-size: medium;
+  }
+
+  #sharelocation {
+    font-size: medium;
+  }
+}
+
+/* iPhone landscape */
+@media screen and (min-width: 926px) {
+  button {
+    background-color: #e0cc80;
+    color: black;
+    font-size: x-large;
+    border-radius: 15px;
+    text-decoration: none;
+  }
+
+  #map {
+    width: 850px;
+    grid-row: auto;
+    align-items: center;
+    justify-self: center;
+    justify-content: center;
+  }
+
+  .main {
+    display: grid;
+    width: 900px;
+    grid-template-rows: 60px 400px 200px;
+  }
+
+  .main > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .main > div > .dog {
+    background-color: #e0cc80;
+    border-radius: 50%;
+    font-size: xx-large;
+  }
+
+  .main > button {
+    width: 70px;
+    bottom: 0;
+  }
+
+  #copylocation {
+    font-size: medium;
+  }
+
+  #sharelocation {
+    font-size: medium;
+  }
+
+  #find-me2 {
+    position: absolute;
+    bottom: 50px;
+  }
+}
+
+/* iPad Portrait */
+@media screen and (min-width: 810px) {
+  button {
+    background-color: #e0cc80;
+    color: black;
+    font-size: x-large;
+    border-radius: 15px;
+    text-decoration: none;
+  }
+
+  #map {
+    width: 790px;
+    grid-row: auto;
+    align-items: center;
+    justify-self: center;
+    justify-content: center;
+  }
+
+  .main {
+    display: grid;
+    width: 790px;
+    grid-template-rows: 60px 500px 200px;
+  }
+
+  .main > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .main > div > .dog {
+    background-color: #e0cc80;
+    border-radius: 50%;
+    font-size: xx-large;
+  }
+
+  .main > button {
+    width: 70px;
+    bottom: 0;
+  }
+
+  #copylocation {
+    font-size: medium;
+  }
+
+  #sharelocation {
+    font-size: medium;
+  }
+
+  #find-me2 {
+    position: absolute;
+    bottom: 400px;
+  }
+}
+
+/* iPad Landscape */
+@media screen and (min-width: 1080px) {
+  button {
+    background-color: #e0cc80;
+    color: black;
+    font-size: x-large;
+    border-radius: 15px;
+    text-decoration: none;
+  }
+
+  #map {
+    width: 1050px;
+    grid-row: auto;
+    align-items: center;
+    justify-self: center;
+    justify-content: center;
+  }
+
+  .main {
+    display: grid;
+    width: 1060px;
+    grid-template-rows: 60px 550px 200px;
+  }
+
+  .main > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .main > div > .dog {
+    background-color: #e0cc80;
+    border-radius: 50%;
+    font-size: xx-large;
+  }
+
+  .main > button {
+    width: 70px;
+    bottom: 0;
+  }
+
+  #copylocation {
+    font-size: medium;
+  }
+
+  #sharelocation {
+    font-size: medium;
+  }
+
+  #find-me2 {
+    position: absolute;
+    bottom: 200px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  button {
+    background-color: #e0cc80;
+    color: black;
+    font-size: x-large;
+    border-radius: 15px;
+    text-decoration: none;
+  }
+
+  #map {
+    width: 95%;
+    grid-row: auto;
+    align-items: center;
+    justify-self: center;
+    justify-content: center;
+  }
+
+  .main {
+    display: grid;
+    width: 100%;
+    grid-template-rows: 60px 600px 100px;
+  }
+
+  .main > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .main > div > .dog {
+    background-color: #e0cc80;
+    border-radius: 50%;
+    font-size: xx-large;
+  }
+
+  .main > button {
+    width: 70px;
+    bottom: 0;
+  }
+
+  #copylocation {
+    font-size: medium;
+  }
+
+  #sharelocation {
+    font-size: medium;
+  }
+
+  #find-me2 {
+    position: absolute;
+    bottom: 100px;
+  }
+}
