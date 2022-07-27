@@ -12,9 +12,9 @@ body {
 
 /* iPhone Portrait */
 @media screen and (min-width: 390px) {
-  html {
+  /*html {
     height: 500px;
-  }
+  }*/
 
   button {
     background-color: #e0cc80;
@@ -62,7 +62,7 @@ body {
 
   #find-me2 {
     position: absolute;
-    bottom: 290px;
+    bottom: 120px;
   }
 
   #globe {
