@@ -59,6 +59,35 @@ body {
   #sharelocation {
     font-size: medium;
   }
+
+  #find-me2 {
+    position: absolute;
+    bottom: 290px;
+  }
+
+  #globe {
+    position: absolute;
+    left: 50%;
+    top: 0px;
+  }
+
+  #globe > p {
+    position: relative;
+    left: -50%;
+    font-size: 191px;
+  }
+
+  #dog {
+    position: absolute;
+    left: 50%;
+    top: 240px;
+  }
+
+  #dog > p {
+    position: relative;
+    left: -50%;
+    font-size: 40px;
+  }
 }
 
 /* iPhone landscape */
@@ -112,7 +141,37 @@ body {
 
   #find-me2 {
     position: absolute;
-    bottom: 50px;
+    top: 330px;
+    height: 40px;
+  }
+
+  #find-me-live {
+    position: absolute;
+    bottom: 70px;
+  }
+
+  #globe {
+    position: absolute;
+    left: 50%;
+    top: -160px;
+  }
+
+  #globe > p {
+    position: relative;
+    left: -50%;
+    font-size: 191px;
+  }
+
+  #dog {
+    position: absolute;
+    left: 50%;
+    top: 80px;
+  }
+
+  #dog > p {
+    position: relative;
+    left: -50%;
+    font-size: 40px;
   }
 }
 
@@ -167,7 +226,31 @@ body {
 
   #find-me2 {
     position: absolute;
-    bottom: 400px;
+    bottom: 350px;
+  }
+
+  #globe {
+    position: absolute;
+    left: 50%;
+    top: -0px;
+  }
+
+  #globe > p {
+    position: relative;
+    left: -50%;
+    font-size: 191px;
+  }
+
+  #dog {
+    position: absolute;
+    left: 50%;
+    top: 240px;
+  }
+
+  #dog > p {
+    position: relative;
+    left: -50%;
+    font-size: 40px;
   }
 }
 
@@ -222,7 +305,36 @@ body {
 
   #find-me2 {
     position: absolute;
+    top: 620px;
+  }
+
+  #find-me-live {
+    position: absolute;
     bottom: 200px;
+  }
+
+  #globe {
+    position: absolute;
+    left: 50%;
+    top: -0px;
+  }
+
+  #globe > p {
+    position: relative;
+    left: -50%;
+    font-size: 191px;
+  }
+
+  #dog {
+    position: absolute;
+    left: 50%;
+    top: 240px;
+  }
+
+  #dog > p {
+    position: relative;
+    left: -50%;
+    font-size: 40px;
   }
 }
 

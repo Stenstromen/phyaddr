@@ -12,6 +12,12 @@
   </div>
   <div>
     <p style="display: block; color: #ba9e34;" id="shareurl"></p>
+    <div id="globe">
+      <p>🌍</p>
+    </div>
+    <div id="dog">
+      <p>🐶</p>
+    </div>
   </div>
 </div>
 
@@ -20,8 +26,7 @@
   let currLongitude
 
   function getLiveLoc() {
-    console.log("poo")
-    location.href = "http://localhost:8080/realtime/tx"
+    location.href = "https://noclip.se/realtime/tx"
   }
 
   function getLoc() {
@@ -38,6 +43,8 @@
     getMap(latitude, longitude);
     document.querySelector('#find-me2').style.display = "none"
     document.querySelector("#find-me-live").style.display = "none"
+    document.querySelector('#globe').style.display = "none"
+    document.querySelector("#dog").style.display = "none"
     document.querySelector("#sharelocation").style.display = "flex"
     document.querySelector("#copylocation").style.display = "flex"
   }
@@ -66,7 +73,6 @@
     L.marker([latitude, longitude], iconOptions).addTo(map);
     currLatitude = latitude;
     currLongitude = longitude;
-    console.log(map)
     url(latitude, longitude)
   }
 
@@ -84,16 +90,14 @@
       contentType: 'application/x-www-form-urlencoded',
       cache: false,
       success : function (response) {
-                  console.log(response)
                   let shareurl = document.getElementById("shareurl");
-                  shareurl.textContent = "http://localhost:8080/" + response
+                  shareurl.textContent = "https://noclip.se/" + response
               }
     });
   }
 }
 
 function shareLoc() {
-  console.log("Shareloc")
   let postData = {
       latitude: currLatitude,
       longitude: currLongitude,
@@ -107,11 +111,10 @@ function shareLoc() {
       contentType: 'application/x-www-form-urlencoded',
       cache: false,
       success : async function (response) {
-                  console.log(response)
                   const shareData = {
                     title: "My Location 🐶",
                     text: "My Location 🐶",
-                    url: "https://noclip.se" + response
+                    url: "https://noclip.se/" + response
                   }
                   try {
                     await navigator.share(shareData);
@@ -120,10 +123,12 @@ function shareLoc() {
                 }
               }
     });
+    sharelocationbutton.disabled = true;
 }
 
 function copyLoc() {
-    CopyToClipboard("shareurl")
+    CopyToClipboard("shareurl");
+    copylocationbutton.disabled = true;
 }
 
 </script>

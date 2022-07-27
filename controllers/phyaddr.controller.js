@@ -1,3 +1,4 @@
+const { validationResult } = require("express-validator");
 const model = require("../models/phyaddr.model");
 const urlId = require("../uniqueid/gen.uniqueid");
 
@@ -6,6 +7,11 @@ function sendIndex(req, res) {
 }
 
 function sendLocation(req, res) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.end();
+    return;
+  }
   const foundLocation = model.addrDb.find((msg) => msg.urlid === req.params.id);
   if (foundLocation) {
     let result = {
@@ -17,11 +23,16 @@ function sendLocation(req, res) {
       longitude: result.longitude,
     });
   } else {
-    res.redirect("/")
+    res.redirect("/");
   }
 }
 
 function saveLocation(req, res) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.end();
+    return;
+  }
   const response = {
     urlid: urlId(),
     latitude: req.body.latitude,
@@ -32,25 +43,26 @@ function saveLocation(req, res) {
 }
 
 function realTimeTx(req, res) {
-    res.render("realtimetx.ejs", {
-        urlid:urlId(),
-        room: urlId(),
-    })
+  res.render("realtimetx.ejs", {
+    urlid: urlId(),
+    room: urlId(),
+  });
 }
 
 function realTimeRx(req, res) {
-    const foundLocation = model.addrDb.find((msg) => msg.urlid === req.params.id);
-    if (foundLocation) {
-      /*let result = {
-        latitude: JSON.parse(foundLocation.latitude),
-        longitude: JSON.parse(foundLocation.longitude),
-      };*/
-      res.render("realtimerx.ejs", {
-        room: req.params.id,
-      });
-    } else {
-      res.redirect("/")
-    }
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.end();
+    return;
+  }
+  const foundLocation = model.addrDb.find((msg) => msg.urlid === req.params.id);
+  if (foundLocation) {
+    res.render("realtimerx.ejs", {
+      room: req.params.id,
+    });
+  } else {
+    res.redirect("/");
+  }
 }
 
 module.exports = {
@@ -58,5 +70,5 @@ module.exports = {
   sendLocation,
   saveLocation,
   realTimeTx,
-  realTimeRx
+  realTimeRx,
 };
