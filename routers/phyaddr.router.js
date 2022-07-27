@@ -2,7 +2,7 @@ const express = require("express");
 
 const phyaddrController = require("../controllers/phyaddr.controller");
 const phyaddrRouter = express.Router();
-const { check, param } = require("express-validator");
+const { param } = require("express-validator");
 
 phyaddrRouter.get("/", phyaddrController.sendIndex);
 phyaddrRouter.get(
@@ -24,10 +24,6 @@ phyaddrRouter.get(
 );
 phyaddrRouter.post(
   "/",
-  [
-    check("latitude", "Invalid latitude").not().isEmpty(),
-    check("longitude", "Invalid longitude").not().isEmpty(),
-  ],
   phyaddrController.saveLocation
 );
 
