@@ -26,7 +26,7 @@
   let currLongitude
 
   function getLiveLoc() {
-    location.href = "https://noclip.se/realtime/tx"
+    location.href = "https://www.noclip.se/realtime/tx"
   }
 
   function getLoc() {
@@ -91,7 +91,7 @@
       cache: false,
       success : function (response) {
                   let shareurl = document.getElementById("shareurl");
-                  shareurl.textContent = "https://noclip.se/" + response
+                  shareurl.textContent = "https://www.noclip.se/" + response
               }
     });
   }
@@ -114,7 +114,7 @@ function shareLoc() {
                   const shareData = {
                     title: "My Location 🐶",
                     text: "My Location 🐶",
-                    url: "https://noclip.se/" + response
+                    url: "https://www.noclip.se/" + response
                   }
                   try {
                     await navigator.share(shareData);

@@ -23,7 +23,7 @@ async function shareLoc() {
     const shareData = {
         title: "My Location 🐶",
         text: "My Location 🐶",
-        url: "https://noclip.se/realtime/rx/" + room
+        url: "https://www.noclip.se/realtime/rx/" + room
     }
     try {
         await navigator.share(shareData);
@@ -56,7 +56,7 @@ async function shareLoc() {
                     socket.emit("join_room", response)
                     room = response;
                     let shareurl = document.getElementById("shareurl");
-                    shareurl.textContent = "https://noclip.se/realtime/rx/" + room
+                    shareurl.textContent = "https://www.noclip.se/realtime/rx/" + room
                 }
         });
 

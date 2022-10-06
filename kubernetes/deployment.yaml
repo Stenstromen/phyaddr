@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phyaddr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phyaddr
+  template:
+    metadata:
+      labels:
+        app: phyaddr
+    spec:
+      containers:
+        - name: phyaddr
+          image: dockr.it/phyaddr:x86_64
+          ports:
+            - containerPort: 8080
+      imagePullSecrets:
+        - name: dockrit
+ 
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: phyaddr-service
+spec:
+  selector:
+    app: phyaddr
+  ports:
+    - protocol: TCP
+      port: 8080
+
+--- 
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: phyaddr-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"    
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+
+spec:
+  tls:
+  - hosts:
+    - www.noclip.se
+    secretName: phyaddr-tls
+  rules:
+  - host: www.noclip.se
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: phyaddr-service
+            port:
+              number: 8080
