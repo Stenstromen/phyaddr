@@ -1,4 +1,4 @@
-name: Phyaddr Docker Image CI/CD
+name: Phyaddr CI/CD
 
 on:
   push:
