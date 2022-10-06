@@ -1,3 +1,4 @@
+[![Phyaddr CI/CD](https://github.com/Stenstromen/phyaddr/actions/workflows/main.yml/badge.svg)](https://github.com/Stenstromen/phyaddr/actions/workflows/main.yml)
 # Phy.addr, Share coordinates using openstreetmap
 
 ## Todo
