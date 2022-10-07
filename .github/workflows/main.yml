@@ -7,17 +7,8 @@ on:
     branches: [ "main" ]
         
 jobs:
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Ping
-        uses: Leocardoso94/is-my-site-up@v1.2
-        with:
-          site: www.nocliadsadfsdafsaefasdfp.se
   build:
     name: Build and Push
-    needs: [ test ]
     runs-on: ubuntu-latest
     steps:
       - name: Set up QEMU
