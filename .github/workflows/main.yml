@@ -39,19 +39,13 @@ jobs:
     needs: [ build ]
     runs-on: ubuntu-latest
     steps:
-        - name: Run Snyk to check Docker image for vulnerabilities
-          continue-on-error: true
-          uses: snyk/actions/docker@master
-          env:
-            SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-          with:
-            image: dockr.it/phyaddr:${{ github.sha }}
-            args: --file=Dockerfile
- 
-        - name: Upload result to GitHub Code Scanning
-          uses: github/codeql-action/upload-sarif@v2
-          with:
-            sarif_file: snyk.sarif
+      - name: Run Snyk to check Docker image for vulnerabilities
+        continue-on-error: true
+        uses: snyk/actions/docker@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          image: dockr.it/phyaddr:${{ github.sha }}
         
   deploy:
     name: Deploy
