@@ -43,6 +43,9 @@ jobs:
         with:
           image: dockr.it/phyaddr:${{ github.sha }}
           args: --file=Dockerfile
+          registry: dockr.it
+          username: ${{ secrets.DOCKR_USER }}
+          password: ${{ secrets.DOCKR_PASS }}
           
       - name: Upload result to GitHub Code Scanning
         uses: github/codeql-action/upload-sarif@v2
