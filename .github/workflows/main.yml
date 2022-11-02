@@ -33,10 +33,30 @@ jobs:
             dockr.it/phyaddr:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          
+  snyk:
+    name: Snyk Container Scan
+    needs: [ build ]
+    runs-on: ubuntu-latest
+    steps:
+        - name: Run Snyk to check Docker image for vulnerabilities
+          continue-on-error: true
+          uses: snyk/actions/docker@master
+          env:
+            SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+          with:
+            image: dockr.it/phyaddr:${{ github.sha }}
+            args: --file=Dockerfile
+ 
+        - name: Upload result to GitHub Code Scanning
+          uses: github/codeql-action/upload-sarif@v2
+          with:
+            sarif_file: snyk.sarif
+        
   deploy:
     name: Deploy
     if: github.ref == 'refs/heads/main'
-    needs: [ build ]
+    needs: [ snyk, build ]
     runs-on: ubuntu-latest
     steps:
       - name: Set the Kubernetes context
